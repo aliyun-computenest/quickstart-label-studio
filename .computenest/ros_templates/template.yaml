@@ -268,7 +268,7 @@ Resources:
           SourceCidrIp: 0.0.0.0/0
           IpProtocol: tcp
           NicType: internet
-        - PortRange: 8000/8002
+        - PortRange: 8000/8080
           Priority: 1
           SourceCidrIp: 0.0.0.0/0
           IpProtocol: tcp
@@ -311,29 +311,15 @@ Resources:
           - 0
       IoOptimized: optimized
       MaxAmount: 1
-  RunInstallCommand:
-    Type: ALIYUN::ECS::RunCommand
-    Properties:
-      InstanceIds:
-        Fn::GetAtt:
-        - InstanceGroup
-        - InstanceIds
-      Type: RunShellScript
-      Sync: true
-      Timeout: 3600
-      CommandContent: |
-        #!/bin/bash
-        cd /root/docker-kong/compose
-        docker compose up -d
 
 Outputs:
-  Kong Addresses:
+  LabelStudio Addresses:
     Description:
-      zh-cn: Kong 地址
-      en: Kong Addresses
+      zh-cn: LabelStudio 地址
+      en: LabelStudio Addresses
     Value:
       Fn::Sub:
-        - 'http://${ServerAddress}:8002'
+        - 'http://${ServerAddress}:8080'
         - ServerAddress:
             Fn::If:
               - EnablePublicIpConditions
@@ -347,14 +333,14 @@ Outputs:
                 - Fn::GetAtt:
                   - InstanceGroup
                   - PrivateIps
-  Kong Private Addresses:
+  LabelStudio Private Addresses:
     Condition: EnablePublicIpConditions
     Description:
-      zh-cn: Kong 内网地址
-      en: Kong Private Addresses
+      zh-cn: LabelStudio 内网地址
+      en: LabelStudio Private Addresses
     Value:
       Fn::Sub:
-        - 'http://${ServerAddress}:8002'
+        - 'http://${ServerAddress}:8080'
         - ServerAddress:
             Fn::Select:
               - 0
