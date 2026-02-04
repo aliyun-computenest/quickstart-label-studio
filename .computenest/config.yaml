@@ -69,8 +69,8 @@ Artifact:
         git clone https://github.com/aliyun-computenest/quickstart-label-studio.git
 
         # Switch to your project directory
-        cd ./quickstart-label-studio
-
+        cd /root/quickstart-label-studio
+        mkdir -p ./mydata
         sudo chown -R 1000:1000 ./mydata
 
         docker compose up -d
