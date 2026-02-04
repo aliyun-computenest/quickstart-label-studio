@@ -22,7 +22,7 @@ Service:
       EnablePrivateVpcConnection: false
       EnableReversePrivateVpcConnection: false
     ServiceInstanceNameRule:
-      Prefix: Label Studio
+      Prefix: LabelStudio-
       UseDefaultValue: false
   OperationMetadata:
     SupportBackup: false
